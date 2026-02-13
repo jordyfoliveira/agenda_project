@@ -28,4 +28,4 @@ jobs:
 
     - name: Run tests
       run: |
-        python tests/contacts_test.py
+        python C:/Users/Utilizador/Documents/VSC/agenda_project/.github/tests/contacts_test.py
