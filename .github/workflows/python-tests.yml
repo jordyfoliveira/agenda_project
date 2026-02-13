@@ -28,4 +28,4 @@ jobs:
 
     - name: Run tests
       run: |
-        python contacts_test.py
+        python tests/contacts_test.py
