@@ -28,5 +28,5 @@ jobs:
 
     - name: Run tests
       run: |
-        python -m unittest discover -s tests -p "contacts_test.py"
+        python -m unittest discover -s tests -p "/tests/contacts_test.py"
 #        #python ".github/workflows/tests/contacts_test.py"

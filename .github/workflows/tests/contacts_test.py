@@ -1,6 +1,6 @@
 import unittest
 import os
-from contacts import add_contact, search_contact, edit_contact, delete_contact
+from contacts import add_contact_cli, search_contact_cli, edit_contact_cli, delete_contact_cli
 from file_utils import load_contacts, save_contacts
 
 # Vamos usar um ficheiro de teste
