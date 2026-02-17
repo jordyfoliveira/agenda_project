@@ -1,31 +1,52 @@
-from contacts import add_contact, search_contact, edit_contact, delete_contact
-import sys
+import argparse
+from contacts import (
+    add_contact_cli,
+    search_contact_cli,
+    edit_contact_cli,
+    delete_contact_cli,
+    list_contacts_cli,
+)
 
-def menu():
-    while True:
-        print("\n===== AGENDA =====")
-        print("1 - Adicionar")
-        print("2 - Procurar")
-        print("3 - Editar")
-        print("4 - Apagar")
-        print("5 - Sair")
+def build_parser():
+    parser = argparse.ArgumentParser(prog="agenda", description="Gestor de contactos (CLI)")
+    sub = parser.add_subparsers(dest="command", required=True)
 
-        option = input("Escolha: ").strip()
+    p_add = sub.add_parser("add", help="Adicionar contacto")
+    p_add.add_argument("--name", required=True)
+    p_add.add_argument("--phone", required=True)
 
-        if option == "1":
-            add_contact()
-        elif option == "2":
-            search_contact()
-        elif option == "3":
-            edit_contact()
-        elif option == "4":
-            delete_contact()
-        elif option == "5":
-            print("Até breve.")
-            sys.exit(0)
-        else:
-            print("Opção inválida.")
-            input("Prima ENTER para continuar...")
+    p_search = sub.add_parser("search", help="Procurar contacto (parcial)")
+    p_search.add_argument("--name", required=True)
+
+    p_edit = sub.add_parser("edit", help="Editar telefone de um contacto")
+    p_edit.add_argument("--name", required=True)
+    p_edit.add_argument("--phone", required=True)
+
+    p_delete = sub.add_parser("delete", help="Apagar contacto")
+    p_delete.add_argument("--name", required=True)
+
+    sub.add_parser("list", help="Listar todos os contactos")
+
+    return parser
+
+def main():
+    parser = build_parser()
+    args = parser.parse_args()
+
+    if args.command == "add":
+        add_contact_cli(args.name, args.phone)
+
+    elif args.command == "search":
+        search_contact_cli(args.name)
+
+    elif args.command == "edit":
+        edit_contact_cli(args.name, args.phone)
+
+    elif args.command == "delete":
+        delete_contact_cli(args.name)
+
+    elif args.command == "list":
+        list_contacts_cli()
 
 if __name__ == "__main__":
-    menu()
+    main()
